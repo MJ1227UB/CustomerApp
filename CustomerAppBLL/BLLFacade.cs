@@ -2,19 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using CustomerAppBLL.Services;
+using CustomerAppDAL;
 
 namespace CustomerAppBLL
 {
     public class BLLFacade
     {
-        public ICustomerService GetCustomerService()
-        {
-            return new CustomerService();
-        }
-
         public ICustomerService CustomerService
         {
-            get { return new CustomerService(); }
+            get { return new CustomerService(new DALFacade().CustomerRepository); }
         }
     }
 }

@@ -67,7 +67,7 @@ namespace CustomerAppUI
 
         private static Customer FindCustomerByID()
         {
-            Console.WriteLine("Insert Customer ID: ");
+            Console.WriteLine("Insert Customer Id: ");
             int id;
             while (!int.TryParse(Console.ReadLine(), out id))
             {
@@ -100,7 +100,7 @@ namespace CustomerAppUI
             var customerFound = FindCustomerByID();
             if (customerFound != null)
             {
-                bllFacade.CustomerService.Delete(customerFound.ID);
+                bllFacade.CustomerService.Delete(customerFound.Id);
             }
             var response = customerFound == null ? "Customer not found" : "Customer was deleted";
             Console.WriteLine(response);
@@ -130,7 +130,7 @@ namespace CustomerAppUI
             Console.WriteLine("\nList of Customers:");
             foreach (var customer in bllFacade.CustomerService.GetAll())
             {
-                Console.WriteLine($"ID: {customer.ID} Name: {customer.FirstName} {customer.LastName} Adress: {customer.Adress}");
+                Console.WriteLine($"Id: {customer.Id} Name: {customer.FirstName} {customer.LastName} Adress: {customer.Adress}");
             }
             Console.WriteLine("");
         }

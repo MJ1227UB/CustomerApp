@@ -9,36 +9,34 @@ namespace CustomerAppBLL.Services
 {
     class CustomerService : ICustomerService
     {
+        ICustomerRepository repo;
+
+        public CustomerService(ICustomerRepository repo)
+        {
+            this.repo = repo;
+        }
+
         public Customer Create(Customer customer)
         {
-            Customer newCustomer;
-            FakeDB.Customers.Add(newCustomer = new Customer()
-            {
-                ID = FakeDB.Id++,
-                FirstName = customer.FirstName,
-                LastName = customer.LastName,
-                Adress = customer.Adress
-            });
-            return newCustomer;
+            return repo.Create(customer);
         }
 
         public List<Customer> GetAll()
         {
-            return new List<Customer>(FakeDB.Customers);
+            return repo.GetAll();
         }
 
         public Customer get(int Id)
         {
-            return FakeDB.Customers.FirstOrDefault(x => x.ID == Id);
+            return repo.get(Id);
         }
 
         public Customer Update(Customer customer)
         {
-            var customerFromDB = get(customer.ID);
+            var customerFromDB = get(customer.Id);
             if (customerFromDB == null)
             {
                 throw new InvalidOperationException("Customer not found");
-
             }
             customerFromDB.FirstName = customer.FirstName;
             customerFromDB.LastName = customer.LastName;
@@ -48,9 +46,7 @@ namespace CustomerAppBLL.Services
 
         public Customer Delete(int Id)
         {
-            var customer = get(Id);
-            FakeDB.Customers.Remove(customer);
-            return customer;
+            return repo.Delete(Id);
         }
     }
 }
