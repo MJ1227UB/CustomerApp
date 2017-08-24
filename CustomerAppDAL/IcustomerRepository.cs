@@ -12,7 +12,7 @@ namespace CustomerAppDAL
 
         //Read
         List<Customer> GetAll();
-        Customer get(int Id);
+        Customer Get(int Id);
 
         //Delete
         Customer Delete(int Id);

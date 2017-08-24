@@ -9,44 +9,64 @@ namespace CustomerAppBLL.Services
 {
     class CustomerService : ICustomerService
     {
-        ICustomerRepository repo;
+        private DALFacade facade;
 
-        public CustomerService(ICustomerRepository repo)
+        public CustomerService(DALFacade facade)
         {
-            this.repo = repo;
+            this.facade = facade;
         }
 
         public Customer Create(Customer customer)
         {
-            return repo.Create(customer);
+            using(var uow = facade.UnitOfWork)
+            {
+                var newCustomer = uow.CustomerRepository.Create(customer);
+                uow.Complete();
+                return newCustomer;
+            }
         }
 
         public List<Customer> GetAll()
         {
-            return repo.GetAll();
+            using (var uow = facade.UnitOfWork)
+            {
+                return uow.CustomerRepository.GetAll();
+            }
         }
 
-        public Customer get(int Id)
+        public Customer Get(int Id)
         {
-            return repo.get(Id);
+            using (var uow = facade.UnitOfWork)
+            {
+                return uow.CustomerRepository.Get(Id);
+            }
         }
 
         public Customer Update(Customer customer)
         {
-            var customerFromDB = get(customer.Id);
-            if (customerFromDB == null)
+            using (var uow = facade.UnitOfWork)
             {
-                throw new InvalidOperationException("Customer not found");
+                var customerFromDB = uow.CustomerRepository.Get(customer.Id);
+                if (customerFromDB == null)
+                {
+                    throw new InvalidOperationException("Customer not found");
+                }
+                customerFromDB.FirstName = customer.FirstName;
+                customerFromDB.LastName = customer.LastName;
+                customerFromDB.Adress = customer.Adress;
+                uow.Complete();
+                return customerFromDB;
             }
-            customerFromDB.FirstName = customer.FirstName;
-            customerFromDB.LastName = customer.LastName;
-            customerFromDB.Adress = customer.Adress;
-            return customerFromDB;
         }
 
         public Customer Delete(int Id)
         {
-            return repo.Delete(Id);
+            using (var uow = facade.UnitOfWork)
+            {
+                var newCustomer = uow.CustomerRepository.Delete(Id);
+                uow.Complete();
+                return newCustomer;
+            }
         }
     }
 }

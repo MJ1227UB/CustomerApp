@@ -12,7 +12,7 @@ namespace CustomerAppBLL
 
         //Read
         List<Customer> GetAll();
-        Customer get(int Id);
+        Customer Get(int Id);
 
         //Update
         Customer Update(Customer customer);

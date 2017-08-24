@@ -18,8 +18,6 @@ namespace CustomerAppDAL.Repositories
         public Customer Create(Customer customer)
         {
             _context.Customers.Add(customer);
-            //Move to UOW later!
-            _context.SaveChanges();
             return customer;
         }
 
@@ -28,17 +26,15 @@ namespace CustomerAppDAL.Repositories
             return _context.Customers.ToList();
         }
 
-        public Customer get(int Id)
+        public Customer Get(int Id)
         {
             return _context.Customers.FirstOrDefault(x => x.Id == Id);
         }
 
         public Customer Delete(int Id)
         {
-            var customer = get(Id);
+            var customer = Get(Id);
             _context.Customers.Remove(customer);
-            //Move to UOW later!
-            _context.SaveChanges();
             return customer;
         }
     }

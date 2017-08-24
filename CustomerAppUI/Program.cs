@@ -74,7 +74,7 @@ namespace CustomerAppUI
                 Console.WriteLine("Please insert a number");
             }
 
-            return bllFacade.CustomerService.get(id);
+            return bllFacade.CustomerService.Get(id);
         }
 
         private static void EditCustomer()
@@ -88,11 +88,13 @@ namespace CustomerAppUI
                 customerFound.LastName = Console.ReadLine();
                 Console.WriteLine("Adress: ");
                 customerFound.Adress = Console.ReadLine();
+                bllFacade.CustomerService.Update(customerFound);
             }
             else
             {
                 Console.WriteLine("Customer not found!");
             }
+            
         }
 
         private static void DeleteCustomer()

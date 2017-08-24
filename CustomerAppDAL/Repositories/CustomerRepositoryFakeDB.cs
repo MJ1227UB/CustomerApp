@@ -31,7 +31,7 @@ namespace CustomerAppDAL.Repositories
             return new List<Customer>(Customers);
         }
 
-        public Customer get(int Id)
+        public Customer Get(int Id)
         {
             return Customers.FirstOrDefault(x => x.Id == Id);
         }
@@ -39,7 +39,7 @@ namespace CustomerAppDAL.Repositories
 
         public Customer Delete(int Id)
         {
-            var customer = get(Id);
+            var customer = Get(Id);
             Customers.Remove(customer);
             return customer;
         }
