@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CustomerAppBLL;
-using CustomerAppEntity;
+using CustomerAppBLL.BusinessObjects;
 
 namespace CustomerAppUI
 {
@@ -11,13 +11,13 @@ namespace CustomerAppUI
         
         static void Main(string[] args)
         {
-            bllFacade.CustomerService.Create(new Customer()
+            bllFacade.CustomerService.Create(new CustomerBO()
             {
                 FirstName = "Bob",
                 LastName = "Dylan",
                 Adress = "BongoStreet 202"
             });
-            bllFacade.CustomerService.Create(new Customer()
+            bllFacade.CustomerService.Create(new CustomerBO()
             {
                 FirstName = "Lars",
                 LastName = "Bilde",
@@ -65,7 +65,7 @@ namespace CustomerAppUI
             Console.ReadLine();
         }
 
-        private static Customer FindCustomerByID()
+        private static CustomerBO FindCustomerByID()
         {
             Console.WriteLine("Insert Customer Id: ");
             int id;
@@ -119,7 +119,7 @@ namespace CustomerAppUI
             Console.WriteLine("Adress:");
             var adress = Console.ReadLine();
 
-            bllFacade.CustomerService.Create(new Customer()
+            bllFacade.CustomerService.Create(new CustomerBO()
             {
                 FirstName = firstName,
                 LastName = lastName,
@@ -132,7 +132,7 @@ namespace CustomerAppUI
             Console.WriteLine("\nList of Customers:");
             foreach (var customer in bllFacade.CustomerService.GetAll())
             {
-                Console.WriteLine($"Id: {customer.Id} Name: {customer.FirstName} {customer.LastName} Adress: {customer.Adress}");
+                Console.WriteLine($"Id: {customer.Id} Name: {customer.FullName} Adress: {customer.Adress}");
             }
             Console.WriteLine("");
         }

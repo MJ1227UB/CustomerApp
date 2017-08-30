@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using CustomerAppEntity;
+using CustomerAppBLL.BusinessObjects;
 
 namespace CustomerAppBLL
 {
     public interface ICustomerService
     {
         //Create
-        Customer Create(Customer customer);
+        CustomerBO Create(CustomerBO customer);
 
         //Read
-        List<Customer> GetAll();
-        Customer Get(int Id);
+        List<CustomerBO> GetAll();
+        CustomerBO Get(int Id);
 
         //Update
-        Customer Update(Customer customer);
+        CustomerBO Update(CustomerBO customer);
 
         //Delete
-        Customer Delete(int Id);
+        CustomerBO Delete(int Id);
     }
 }

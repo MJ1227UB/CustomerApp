@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using CustomerAppEntity;
+using CustomerAppDAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CustomerAppDAL.Context

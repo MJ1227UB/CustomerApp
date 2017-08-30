@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CustomerAppDAL.Context;
-using CustomerAppEntity;
+using CustomerAppDAL.Entities;
 
 namespace CustomerAppDAL.Repositories
 {
